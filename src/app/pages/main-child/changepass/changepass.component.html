@@ -1,0 +1,36 @@
+<div class="col-sm-8">
+    <h2>Profile</h2>
+      <table style="margin-left: 10px; width: 80%;">
+            <tr>
+                <td>Current Password</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="password" class="form-control form-control-lg" placeholder="" [(ngModel)]="op">
+              </td>
+            </tr>
+            <tr>
+                <td style="padding-top: 10px;">New Password</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="password" class="form-control form-control-lg" placeholder="" [(ngModel)]="np">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-top: 10px;">Confirm Password</td>
+            </tr>
+            <tr>
+            <td>
+                <input type="password" class="form-control form-control-lg" placeholder="" [(ngModel)]="cp">
+            </td>
+            </tr>
+        
+      </table>
+
+      <div class="spinner-border" style="float: right;margin-top: 25px;margin-right: 20%;" role="status" *ngIf="loader">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <button class="btn btn-block btn-primary btn-lg font-weight-medium" style="width: 200px;float: right;margin-top: 25px;margin-right: 20%;" (click)="save()" *ngIf="!loader">Save</button>
+    
+  </div>

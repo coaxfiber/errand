@@ -1,0 +1,64 @@
+
+    <div class="row">
+      <div class="col-sm-4">
+        <input type="file" class="form-control" accept="image/*" (change)="imageUpload($event)">
+        <div style="height: 10px;"></div>
+        <img [src]="photo" alt="Profpic" (error)="handleMissingImage($event)" width="100%">
+      </div>
+      
+      <div class="col-sm-8">
+        <h2>Profile</h2>
+          <table style="margin-left: 10px; width: 80%;">
+                <tr>
+                    <td>First Name</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="form-control form-control-lg" placeholder="First Name" [(ngModel)]="fname">
+                  </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 10px;">Middle Name</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="form-control form-control-lg" placeholder="Middle Name" [(ngModel)]="mname">
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding-top: 10px;">Last Name</td>
+              </tr>
+            <tr>
+              <td>
+                <input type="text" class="form-control form-control-lg" placeholder="Last Name" [(ngModel)]="lname">
+              </td>
+            </tr>
+            <tr>
+                  <td style="padding-top: 10px;">Contact</td>
+              </tr>
+            <tr>
+              <td>
+                <input type="text" class="form-control form-control-lg" placeholder="Contact" [(ngModel)]="contact">
+              </td>
+            </tr>
+            <tr>
+                  <td style="padding-top: 10px;">Address</td>
+              </tr>
+            <tr>
+              <td>
+                <input type="text" class="form-control form-control-lg" placeholder="Address" [(ngModel)]="address">
+              </td>
+            </tr>
+              
+          </table>
+
+          <div class="spinner-border" style="float: right;margin-top: 25px;margin-right: 20%;" role="status" *ngIf="loader">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <button class="btn btn-block btn-primary btn-lg font-weight-medium" style="width: 200px;float: right;margin-top: 25px;margin-right: 20%;" (click)="save()" *ngIf="!loader">Save</button>
+          
+
+
+          
+      </div>
+    </div>

@@ -1,0 +1,116 @@
+<section class="gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input [(ngModel)]="fname" type="text" id="firstName" class="form-control form-control-lg" />
+                      <label class="form-label" for="firstName">First Name</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      <input [(ngModel)]="lname"  type="text" id="lastName" class="form-control form-control-lg" />
+                      <label class="form-label" for="lastName">Last Name</label>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+  
+                    <div class="form-outline datepicker w-100">
+                      <input
+                      [(ngModel)]="email" 
+                        type="email"
+                        class="form-control form-control-lg"
+                        id="nEmail" autocomplete="chrome-off"
+                      />
+                      <label for="nEmail" class="form-label">Email Address</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                   
+                    <div class="form-outline datepicker w-100">
+                        <input
+                        [(ngModel)]="contact" 
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="Contact"
+                          pattern="[0-9]+"
+                          maxlength="11" 
+                          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        />
+                        <label for="Contact" class="form-label">Contact Number</label>
+                      </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-12 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                      <input
+                      [(ngModel)]="address"  type="text" id="Address"class="form-control form-control-lg" />
+                      <label class="form-label" for="Address">Address</label>
+                    </div>
+  
+                  </div>
+                  
+                </div>
+  
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4 pb-2">
+    
+                      <div class="form-outline">
+                        <input autocomplete="new-password"  [(ngModel)]="password"  type="password" id="nPassword" class="form-control form-control-lg" />
+                        <label class="form-label" for="nPassword" >Password</label>
+                      </div>
+    
+                    </div>
+                    <div class="col-md-6 mb-4 pb-2">
+    
+                      <div class="form-outline">
+                        <input [(ngModel)]="cpassword"  type="password" id="Confirm" class="form-control form-control-lg" />
+                        <label class="form-label" for="Confirm">Confirm Password</label>
+                      </div>
+    
+                    </div>
+                    
+                  </div>
+  
+                  <div class="row">
+                    <div class="col-12">
+    
+                      <select class="select form-control" [(ngModel)]="type" >
+                        <option value="" disabled>Choose option</option>
+                        <option value="1">Rider</option>
+                        <option value="2">User</option>
+                      </select>
+                      <label class="form-label select-label">Register as</label>
+    
+                    </div>
+                  </div>
+                <div class="mt-4 pt-2">
+                  <input class="btn btn-primary btn-lg" type="button" value="Submit" (click)="save()"/>
+                </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

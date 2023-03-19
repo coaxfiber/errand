@@ -1,0 +1,104 @@
+
+<table style="width:100%; margin: 0 20px 0 20px">
+    <tr>
+        <td style="width: 50%;padding: 10px;" valign="top">
+          <button type="button" class="btn btn-primary" style="float: right;" (click)="addplace()">
+            Add
+         </button>
+            <h4>Partner List:</h4>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Search</label> 
+                <input type="text" class="form-control" [(ngModel)]="search" placeholder="Type order #" (ngModelChange)="searchplace()">
+              </div>
+              
+          <div style="max-height: calc(100vh - 540px);overflow: auto;">
+            <table  class="table table-striped">
+                <tr *ngFor="let a of placearray">
+                    <th class="pointer  {{checkselected(a)}}" (click)="selectplace(a)">
+                        <table style="width: 100%;">
+                            <tr style="padding: 0px;" >
+                                <td style="width: 50px;padding: 0px;">
+                                    <img [src]="getphoto(a.photo)" style="width: 50px;height: 50px;">
+                                </td>
+                                <td>
+                                    <a>{{ a.name }}</a><br>
+                                    <span style="font-weight:100;">{{a.descrip}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                    </th>
+                </tr>
+                
+            </table>
+          </div>
+        </td>
+        
+        <td style="width: 50%;padding: 10px;">
+            <div style="border-style: solid;border-radius: 25px;" *ngIf="placeselected.id!=''">
+                <div style="height:10px"></div>
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="padding-left: 10px;">
+                            <table style="margin-left: 10px; width: 80%;">
+                                <tr>
+                                    <td>Place name</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Place name" [(ngModel)]="placeselected.name">
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 10px;">Description</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Description" [(ngModel)]="placeselected.descrip">
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 10px;">Address</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <input type="text" class="form-control" placeholder="Address" [(ngModel)]="placeselected.address">
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 10px;">Type</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <select class="form-select form-control" aria-label="Default select example" [(ngModel)]="placeselected.type">
+                                        <option selected>please choose</option>
+                                        <option value="1">Pansitan</option>
+                                        <option value="2">Restaurant</option>
+                                        <option value="3">Fast Food</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                            
+                              
+                          </table>
+                          <br>
+                          <button type="button" class="btn btn-primary" style="float: right;margin-right: 100px;margin-bottom: 20px;" (click)="save()">
+        
+                             Save
+                          </button>
+                          <input type="file" class="form-control form-control-lg" style="margin-left:13px;width: 210px;" accept="image/*" (change)="imageUpload($event)" >
+                            <div style="height: 10px;"></div>
+                            <img [src]="photo" alt="Profpic" (error)="handleMissingImage($event)" width="150px">
+                            <button type="button" class="btn btn-danger" style="float: right;" (click)="Delete()" *ngIf="placeselected.id!='0'">
+          
+                               Delete
+                            </button>
+                            <br><br>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,161 @@
+
+<table style="width:100%; margin: 0 20px 0 20px">
+  <tr>
+      <td style="width: 50%;padding: 10px;">
+          <h4>Order List:</h4>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Search</label> 
+                <input type="text" class="form-control" [(ngModel)]="search" placeholder="Type order #" (ngModelChange)="searchorder()">
+              </div>
+          <input type="checkbox" (click)="showpending($event)" [(ngModel)]="shpend"> Show only Pending status
+          <div style="max-height: calc(100vh - 540px);overflow: auto;">
+            <table  class="table table-striped">
+                <tr *ngFor="let a of orderarray">
+                    <th class="pointer {{checkselected(a)}}" (click)="selectorder(a)">
+                        <a>Order # {{ a.id }}</a> <button class="btn btn-warning" style="float: right;" *ngIf="a.status=='Pending'">{{a.status}}</button>
+                    </th>
+                </tr>
+                
+            </table>
+          </div>
+      </td>
+      
+      <td style="width: 50%;padding: 10px;">
+          <div style="border-style: solid;border-radius: 25px;" *ngIf="orderselect.id!=''">
+              <table style="width: 100%;">
+                  <tr>
+                      <td style="width: 50%;padding-left: 10px;">
+                          <h2>Order # {{orderselect.id}}</h2>
+                          <h5>Status: {{orderselect.status}}</h5>
+
+                          
+                          <h4  *ngIf="orderselect.deliveryType=='food'">Order:</h4>
+                          <h4  *ngIf="orderselect.deliveryType=='parcel'"> Parcel Description: </h4>
+                          <p style="margin-left: 20px;">
+                              {{ orderselect.description}}
+                          </p>
+                          
+                          <div *ngIf="orderselect.deliveryType=='food'">
+                            <div style="height: 10px;"></div>
+                            Place: <b>{{orderselect.placename}}</b><br>
+                    
+                            <table style="width:100%" >
+                              <tr>
+                                <td  style="padding-left: 5px;white-space: normal;" valign="top">
+                                  <div style="height: 3px"></div>
+                                  <p style="font-size: 13px;">{{ orderselect.address }}</p>
+                                </td>
+                              </tr>
+                            </table>
+                    
+                            
+                            <div style="height: 10px;"></div>
+                            Delivery Address:
+                    
+                            <table style="width:100%" >
+                              <tr>
+                                <td  style="padding-left: 5px;white-space: normal;" valign="top">
+                                  <div style="height: 3px"></div>
+                                  <p style="font-size: 13px;">{{ orderselect.deliverto }}</p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+
+                          <div *ngIf="orderselect.deliveryType=='parcel'">
+                            <div style="height: 10px;"></div>
+                            Parcel: <b>{{orderselect.placename}}</b><br>
+                            
+                            <div style="height: 10px;"></div>
+                            Pick-up Address:
+                            <table style="width:100%" >
+                              <tr>
+                                <td  style="padding-left: 5px;white-space: normal;" valign="top">
+                                  <div style="height: 3px"></div>
+                                  <p style="font-size: 13px;"><b>{{ orderselect.address }}</b></p>
+                                </td>
+                              </tr>
+                            </table>
+                            
+                            <div style="height: 10px;"></div>
+                            Delivery Address:
+                    
+                            <table style="width:100%" >
+                              <tr>
+                                <td  style="padding-left: 5px;white-space: normal;" valign="top">
+                                  <div style="height: 3px"></div>
+                                  <p style="font-size: 13px;"><b>{{ orderselect.deliverto }}</b></p>
+                                </td>
+                              </tr>
+                            </table>
+                            <div style="height: 10px;"></div>
+                            Person to Contact:
+                    
+                            <table style="width:100%" >
+                              <tr>
+                                <td  style="padding-left: 5px;white-space: normal;" valign="top">
+                                  <div style="height: 3px"></div>
+                                  <p style="font-size: 13px;"><b>{{ orderselect.contact }}</b></p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                      </td>
+                      <td style="width: 50%;padding: 10px;">
+                        <div *ngIf="orderselect.riderid != '0'">
+                          <img [src]="photo" alt="Profpic"  (error)="handleMissingImage($event)" width="100%">        
+                          <h4 style="text-align: center;">Rider Name: {{getriderdetail(orderselect.riderid).fname}}</h4>
+                          <h3 style="text-align: center;">{{getriderdetail(orderselect.riderid).contact}}</h3>
+
+                        </div>
+                        <div *ngIf="orderselect.riderid == '0'">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+ 
+                            Assign a Rider
+                          </button>
+                          </div>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+          <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Assign a Rider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Search Rider</label> 
+          <input type="text" class="form-control" [(ngModel)]="searchrider" placeholder="Search rider name" (ngModelChange)="searchorderrider()">
+        </div>
+        <div style="max-height:calc(100vh - 400px);overflow: auto;">
+          <table  class="table table-striped" >
+            <tr *ngFor="let a of riders" class="{{checkifhasactive(a.transactions)}}">
+                <th>
+                  <button class="btn btn-primary" data-dismiss="modal" style="float: right;" (click)="assignrider(a.id)">Assign</button>
+                
+                    <a>Rider ID: {{ a.id }}</a><br>
+                      Rider Name: {{ a.fname }}  {{ a.lname }} <span *ngIf="checkifhasactive(a.transactions)=='red'">(Assigned: {{getactivetrans(a.transactions)}})</span>
+                    </th>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+      </td>
+  </tr>
+</table>
